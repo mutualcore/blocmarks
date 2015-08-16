@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'incoming/create'
+
   devise_for :users
 
   get 'welcome/index'
