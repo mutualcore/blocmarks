@@ -13,7 +13,7 @@
               <small>
                 <% topic.bookmarks.each do |b| %>
                   <div>
-                    <%= b.url %>
+                    <%= b.url %> <% if policy(b).edit? %>(<%= link_to "Edit", edit_topic_bookmark_path(topic, b) %> | <%= link_to "Delete", [topic, b], method: :delete %>)<% end %>
                   </div>
                 <% end %>
               </small>
