@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'incoming/create'
 
   devise_for :users
+  resources :topics
+  resources :users, only: [:show]
 
   get 'welcome/index'
   get 'welcome/about'
