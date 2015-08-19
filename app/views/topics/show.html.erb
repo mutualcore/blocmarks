@@ -10,6 +10,17 @@
       <% @bookmarks.each do |b| %>
         <div>
           <%= b.url %> <% if policy(b).edit? %>(<%= link_to "Edit", edit_topic_bookmark_path(@topic, b) %> | <%= link_to "Delete", [@topic, b], method: :delete %>)<% end %>
+          <% if policy(Like.new).create? %>
+            <div>
+              <% if like = current_user.liked(b)%>
+                <%= link_to [@topic, b, like], method: :delete do %>Unlike
+                <% end %>
+              <% else %>
+                <%= link_to [@topic, b, Like.new], method: :post do %>Like
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       <% end %>
    </div>       
