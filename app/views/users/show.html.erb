@@ -1,0 +1,18 @@
+<% if !@user_bookmarks.empty? %>
+  <h2>My Bookmarks</h2>
+  <% @user_bookmarks.each do |b| %>
+    <div>
+      <%= b.url %> (<%= link_to [b.topic, b], method: :delete do %>
+      Remove <% end %>)
+    </div>
+  <% end %>
+<% end %>
+
+<% if !@liked_bookmarks.empty? %>
+  <h2>My Liked Bookmarks</h2>
+  <% @liked_bookmarks.each do |l| %>
+    <div>
+      <%= l.bookmark.url %> (<%= link_to [l.bookmark.topic, l.bookmark, l], method: :delete do %> Unlike <% end %>)
+    </div>
+  <% end %>
+<% end %>
