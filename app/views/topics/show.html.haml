@@ -1,0 +1,21 @@
+%h1= @topic.title
+= link_to "Edit Topic", edit_topic_path, class: 'btn btn-success'
+= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?'}
+= link_to "New Bookmark", new_topic_bookmark_path(@topic), class: 'btn btn-success'
+%br/
+%br/
+.row
+  .col-md-8
+    - @bookmarks.each do |b|
+      %div
+        = b.url
+        - if policy(b).edit?
+          (#{link_to "Edit", edit_topic_bookmark_path(@topic, b)} | #{link_to "Delete", [@topic, b], method: :delete})
+        - if policy(Like.new).create?
+          %div
+            - if like = current_user.liked(b)
+              = link_to [@topic, b, like], method: :delete do
+                Unlike
+            - else
+              = link_to [@topic, b, Like.new], method: :post do
+                Like
